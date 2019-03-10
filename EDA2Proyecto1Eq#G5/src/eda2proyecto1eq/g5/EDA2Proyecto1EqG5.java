@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package eda2proyecto1eq.g5;
-
 /**
  *
  * @author scoop
@@ -15,7 +14,10 @@ public class EDA2Proyecto1EqG5 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        
     }
     
+    static void print(String argumento){
+        System.out.println(argumento);
+    }
 }
