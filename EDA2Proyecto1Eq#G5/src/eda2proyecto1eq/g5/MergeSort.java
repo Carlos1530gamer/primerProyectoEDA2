@@ -24,58 +24,60 @@ public class MergeSort {
         System.out.println();
     }
     
-    void merge(int arr[], int l, int m, int r) 
+    void merge(int arreglo[], int izquierda, int medio, int derecha) 
     { 
-        int n1 = m - l + 1; 
-        int n2 = r - m; 
+        int tamanio_arreglo_izquierda = medio - izquierda + 1; 
+        int tamanio_arreglo_derecha = derecha - medio; 
   
-        int L[] = new int [n1]; 
-        int R[] = new int [n2]; 
+        int arreglo_izquierda[] = new int [tamanio_arreglo_izquierda]; 
+        int arreglo_derecha[] = new int [tamanio_arreglo_derecha]; 
   
-        for (int i=0; i<n1; ++i) 
-            L[i] = arr[l + i]; 
-        for (int j=0; j<n2; ++j) 
-            R[j] = arr[m + 1+ j]; 
+        for (int indice = 0; indice < tamanio_arreglo_izquierda; ++indice){
+          arreglo_izquierda[indice] = arreglo[izquierda + indice];  
+        }  
+        for (int indice_secundario = 0; indice_secundario < tamanio_arreglo_derecha; ++indice_secundario) {
+          arreglo_derecha[indice_secundario] = arreglo[medio + 1 + indice_secundario];  
+        } 
+        int indice_arreglo_izquierda = 0, indice_arreglo_derecha = 0; 
   
-        int i = 0, j = 0; 
-  
-        int k = l; 
-        while (i < n1 && j < n2) 
+        int indice_arreglo_mezcla = izquierda; 
+        while (indice_arreglo_izquierda < tamanio_arreglo_izquierda && indice_arreglo_derecha < tamanio_arreglo_derecha) 
         { 
-            if (L[i] <= R[j]) 
+            if (arreglo_izquierda[indice_arreglo_izquierda] <= arreglo_derecha[indice_arreglo_derecha]) 
             { 
-                arr[k] = L[i]; 
-                i++; 
+                arreglo[indice_arreglo_mezcla] = arreglo_izquierda[indice_arreglo_izquierda]; 
+                indice_arreglo_izquierda++; 
             } 
             else
             { 
-                arr[k] = R[j]; 
-                j++; 
+                arreglo[indice_arreglo_mezcla] = arreglo_derecha[indice_arreglo_derecha]; 
+                indice_arreglo_derecha++; 
             } 
-            k++; 
+            indice_arreglo_mezcla++; 
         } 
   
-        while (i < n1) { 
-            arr[k] = L[i]; 
-            i++; 
-            k++; 
+        while (indice_arreglo_izquierda < tamanio_arreglo_izquierda) { 
+            arreglo[indice_arreglo_mezcla] = arreglo_izquierda[indice_arreglo_izquierda]; 
+            indice_arreglo_izquierda++; 
+            indice_arreglo_mezcla++; 
         } 
   
-        while (j < n2) { 
-            arr[k] = R[j]; 
-            j++; 
-            k++; 
+        while (indice_arreglo_derecha < tamanio_arreglo_derecha) { 
+            arreglo[indice_arreglo_mezcla] = arreglo_derecha[indice_arreglo_derecha]; 
+            indice_arreglo_derecha++; 
+            indice_arreglo_mezcla++; 
         } 
     } 
   
-    void sort(int arr[], int l, int r) { 
-        if (l < r) { 
-            int m = (l+r)/2;
+    void sort(int arreglo[], int izquierda, int derecha) { 
+        if (izquierda < derecha) { 
+            int medio = (izquierda + derecha) / 2;
 
-            sort(arr, l, m); 
-            sort(arr , m+1, r); 
+            sort(arreglo, izquierda, medio); 
+            sort(arreglo , medio + 1 , derecha); 
   
-            merge(arr, l, m, r); 
+            merge(arreglo, izquierda, medio, derecha);
+            
         } 
     }
 }
