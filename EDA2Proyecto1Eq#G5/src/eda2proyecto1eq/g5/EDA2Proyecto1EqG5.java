@@ -14,7 +14,8 @@ public class EDA2Proyecto1EqG5 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        
+        DistributionSort distributionSort = new DistributionSort("Hola.txt");
+        distributionSort.sort();
     }
     
     static void print(String argumento){
