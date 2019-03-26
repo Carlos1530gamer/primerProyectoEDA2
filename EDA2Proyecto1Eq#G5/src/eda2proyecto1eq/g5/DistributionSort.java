@@ -8,8 +8,8 @@ package eda2proyecto1eq.g5;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.Buffer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -26,20 +26,26 @@ public class DistributionSort {
     
     public void sort(){
         try {
-            FileReader t0 = new FileReader(this.nombreArchivo);
-            BufferedReader bufferF0 = new BufferedReader(t0);
-            String number = "";
-            int aux;
-            while((aux = bufferF0.read()) != -1){
-                char temp = (char) aux;
-                if(temp != ','){
-                    number = number + temp;
-                }else{
-                    Integer secAx = Integer.parseInt(number);
-                    println(secAx);
-                    number = "";
+            try (FileReader f0Read = new FileReader(this.nombreArchivo)) {
+                BufferedReader bufferF0 = new BufferedReader(f0Read);
+                FileWriter f0Write = new FileWriter(this.nombreArchivo);
+                FileWriter f1Write = new FileWriter("f1.txt");
+                String str = "";
+                int aux;
+                //search the max number
+                while((aux = bufferF0.read()) != -1){
+                    char temp = (char) aux;
+                    if(temp != ','){
+                        str = str + temp;
+                    }else{
+                        println(str);
+                        str = "";
+                    }
                 }
+                //f0 for a
+                bufferF0.close();
             }
+            
         } catch (FileNotFoundException ex) {
             Logger.getLogger(DistributionSort.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
